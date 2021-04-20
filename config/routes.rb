@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'product/sold_by_date_range'
+  get 'customer/:customer_id' => 'customer#show'
 end
