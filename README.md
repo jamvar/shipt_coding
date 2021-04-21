@@ -19,8 +19,8 @@ A basic REST API application using Ruby on Rails where a customer can have an or
   - Params:
     - start_date -> `start_date`
     - end_date -> `end_date`
-    - range -> `range`
-  - Example: `GET /api/v1/products/sales_by_date_range?start_date=2021-02-18&stop_date=2021-04-22&range=week`
+    - interval -> `interval`
+  - Example: `GET /api/v1/products/sales_by_date_range?start_date=2021-02-18&stop_date=2021-04-22&interval=week`
     - Response
     ```
       {

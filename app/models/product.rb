@@ -5,11 +5,11 @@ class Product < ApplicationRecord
   has_many :categories, through: :product_categories
   has_many :order_products
 
-  def self.sold_by_date_range_query(start_date, stop_date, range)
+  def self.sold_by_date_range_query(start_date, stop_date, interval)
     ActiveRecord::Base.connection.execute(
       "
         SELECT
-          DATE(DATE_TRUNC('#{range}', op.created_at)) AS start_date,
+          DATE(DATE_TRUNC('#{interval}', op.created_at)) AS start_date,
           op.product_id AS product_id,
           p.name AS product_name,
           SUM(op.quantity) AS sales
@@ -20,7 +20,7 @@ class Product < ApplicationRecord
         ON
           p.id = op.product_id
         GROUP BY
-          DATE(DATE_TRUNC('#{range}', op.created_at)),
+          DATE(DATE_TRUNC('#{interval}', op.created_at)),
           op.product_id,
           p.name
       "
