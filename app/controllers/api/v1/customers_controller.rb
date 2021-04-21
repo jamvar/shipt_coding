@@ -51,7 +51,7 @@ module Api
         customer = Customer.customer_by_id_query(customer_id).first
 
         if customer
-          return {id: customer['id'], first_name: customer['first_name'], last_name: customer['last_name']}
+          return { id: customer['id'], first_name: customer['first_name'], last_name: customer['last_name'] }
         end
       end
     end
