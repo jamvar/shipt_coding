@@ -19,6 +19,7 @@ class ProductController < ApplicationController
 
     sales.each do |sale|
       product_sales[sale["start_date"]] ||= []
+
       product_sales[sale["start_date"]] << {
         id: sale["product_id"],
         name: sale["product_name"],
