@@ -5,8 +5,8 @@ class Product < ApplicationRecord
   has_many :categories, through: :product_categories
   has_many :order_products
 
-  def self.sold_by_date_range(start_date, stop_date, range)
-    results = ActiveRecord::Base.connection.select_all(
+  def self.sold_by_date_range_query(start_date, stop_date, range)
+    ActiveRecord::Base.connection.execute(
       "
         SELECT
           DATE(DATE_TRUNC('#{range}', op.created_at)) AS start_date,

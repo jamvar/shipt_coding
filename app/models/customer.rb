@@ -4,8 +4,8 @@ class Customer < ApplicationRecord
   has_many :orders
   has_many :ordered_products, through: :orders, source: :products
 
-  def self.orders_by_customer(id)
-    ActiveRecord::Base.connection.select_all(
+  def self.orders_by_customer_query(customer_id)
+    ActiveRecord::Base.connection.execute(
       "
         SELECT
           o.id AS order_id,
@@ -14,7 +14,7 @@ class Customer < ApplicationRecord
         FROM
           orders AS o
         WHERE
-          customer_id=#{id}
+          customer_id=#{customer_id}
         ORDER BY
           o.created_at DESC
       "

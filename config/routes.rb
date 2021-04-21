@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  get 'product/sold_by_date_range'
-  get 'customer/:customer_id' => 'customer#show'
+  get 'products/search' => 'product#search'
+  get 'customers/:id/orders' => 'customer#show'
 end
