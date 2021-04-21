@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  get 'products/search' => 'product#search'
-  get 'customers/:id/orders' => 'customer#show'
-  post 'customers/:id/orders/new' => 'order#new'
+  namespace :api do
+    namespace :v1 do
+      get 'products/sales_by_date_range' => 'products#sales_by_date_range'
+      get 'customers/:id/orders' => 'customers#show_orders'
+      post 'customers/:id/orders/new' => 'orders#new'
+    end
+  end
+
+  match '*path', to: "errors#handle_root_not_found", via: [:get, :post]
 end

@@ -20,4 +20,19 @@ class Customer < ApplicationRecord
       "
     )
   end
+
+  def self.customer_by_id_query(customer_id)
+    ActiveRecord::Base.connection.execute(
+      "
+        SELECT
+          id,
+          first_name,
+          last_name
+        FROM
+          customers
+        WHERE
+          id = #{customer_id}
+      "
+    )
+  end
 end
