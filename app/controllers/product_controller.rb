@@ -4,17 +4,15 @@ class ProductController < ApplicationController
     stop_date = params[:stop_date]
     range = params[:range]
 
-    query_results = Product.sold_by_date_range_query(start_date, stop_date, range)
-    byebug
+    product_sales = sold_by_date_range(start_date, stop_date, range)
 
-    product_sales = sold_by_date_range(query_results, range)
-
-    render json: product_sales
+    render json: {"sales_by_#{range}": product_sales}, status: 200
   end
 
   private
 
-  def sold_by_date_range(sales, range)
+  def sold_by_date_range(start_date, stop_date, range)
+    sales = Product.sold_by_date_range_query(start_date, stop_date, range)
     product_sales = {}
 
     sales.each do |sale|

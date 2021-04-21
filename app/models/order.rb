@@ -42,4 +42,23 @@ class Order < ApplicationRecord
       "
     )
   end
+
+  def self.products_in_order_query(order_id)
+    ActiveRecord::Base.connection.execute(
+      "
+        SELECT
+          p.id AS product_id,
+          p.name AS product_name,
+          op.quantity AS quantity
+        FROM
+          products AS p
+        INNER JOIN
+          order_products AS op
+        ON
+          p.id = op.product_id
+        WHERE
+          op.order_id = #{order_id}
+      "
+    )
+  end
 end

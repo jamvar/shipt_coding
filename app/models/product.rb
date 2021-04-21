@@ -20,7 +20,7 @@ class Product < ApplicationRecord
         ON
           p.id = op.product_id
         GROUP BY
-          DATE(DATE_TRUNC('day', op.created_at)),
+          DATE(DATE_TRUNC('#{range}', op.created_at)),
           op.product_id,
           p.name
       "
